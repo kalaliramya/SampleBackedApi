@@ -1,4 +1,5 @@
-﻿using Google.Apis.Auth.OAuth2;
+﻿using EF_API_Pg.Model;
+using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v3;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
@@ -69,23 +70,24 @@ namespace Samplebacked_api.Model.GdriveService
 
 
 
-        public string CreateFolder(string folderid,string folderName)
+        public ApiResponse CreateFolder(string folderid,string folderName)
         {
           //var driveHelper = new GoogleDriveHelper();
 
             //string folderName = "PortfolioUploads";
 
             // Check if folder exists
+            ApiResponse response = new ApiResponse();
+            response.Code = "Sucess";
             var listRequest = _service.Files.List();
             listRequest.Q = $"mimeType='application/vnd.google-apps.folder' and name='{folderName}' and trashed=false";
             var files = listRequest.Execute().Files;
 
-            string folderId;
-
+            
             if (files != null && files.Count > 0)
             {
-                folderId = files[0].Id;
-                Console.WriteLine($"Folder already exists: {folderName} (ID: {folderId})");
+                response.ResponseData = files[0].Id;
+                response.Message = "Folder already exists: {folderName} (ID: {files[0]})";
             }
             else
             {
@@ -98,10 +100,19 @@ namespace Samplebacked_api.Model.GdriveService
                 var request = _service.Files.Create(folderMetadata);
                 request.Fields = "id";
                 var folder = request.Execute();
-                folderId = folder.Id;
-                Console.WriteLine($"Created folder: {folderName} (ID: {folderId})");
+               response.ResponseData=  folder.Id;
+                response.Message = "Folder already exists: {folderName} (ID: {files[0]}";
             }
-            return folderId;
+            return response;
         }
+
+        public async Task<IList<Google.Apis.Drive.v3.Data.File>> GetAllFilesAsync()
+        {
+            var request = _service.Files.List();
+            request.Fields = "files(id, name, mimeType, modifiedTime, size)";
+            var result = await request.ExecuteAsync();
+            return result.Files;
+        }
+
     }
 }

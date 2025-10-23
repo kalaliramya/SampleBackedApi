@@ -47,13 +47,21 @@ namespace Samplebacked_api.Controllers
             ResponseType type = ResponseType.Success;
             try
             {
-                string data = _driveHelper.CreateFolder(folderid,Foldername);
+                ApiResponse data = _driveHelper.CreateFolder(folderid,Foldername);
                 return Ok(ResponseHandler.GetAppResponse(type, data));
             }
             catch (Exception ex)
             {
                 return BadRequest(ResponseHandler.GetExceptionResponse(ex));
             }
+        }
+
+
+        [HttpGet("files")]
+        public async Task<IActionResult> GetFiles()
+        {
+            var files = await _driveHelper.GetAllFilesAsync();
+            return Ok(files);
         }
 
     }
