@@ -1,0 +1,14 @@
+# Visual Studio / .NET
+bin/
+obj/
+*.user
+*.suo
+*.vs
+
+# Secret / sensitive files
+credentials.json
+appsettings.Development.json
+
+# Other temporary files
+*.log
+*.tmp
