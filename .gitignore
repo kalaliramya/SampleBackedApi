@@ -6,9 +6,19 @@ obj/
 *.vs
 
 # Secret / sensitive files
+appsettings.json
 credentials.json
 appsettings.Development.json
+
+# Google OAuth tokens
+token.json/
+*.token
+
 
 # Other temporary files
 *.log
 *.tmp
+
+
+
+

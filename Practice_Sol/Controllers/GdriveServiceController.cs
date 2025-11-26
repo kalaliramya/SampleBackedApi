@@ -1,4 +1,5 @@
 ﻿using EF_API_Pg.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Samplebacked_api.EFCore;
 using Samplebacked_api.Model.GdriveService;
@@ -7,6 +8,7 @@ namespace Samplebacked_api.Controllers
 {
 
     [ApiController]
+    [Authorize]
     public class GdriveServiceController : Controller
     {
         private readonly GoogleDriveHelper _driveHelper;

@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Samplebacked_api.EFCore.PatientEF;
+using Samplebacked_api.EFCore.UserEF;
 
 namespace Samplebacked_api.EFCore
 {
@@ -12,8 +14,10 @@ namespace Samplebacked_api.EFCore
 
 
         public DbSet<Patient> patients { get; set; }
-        
-   
+        public DbSet<User> users { get; set; }
+        public DbSet<Roles> roles { get; set; }
+
+
 
     }
 }

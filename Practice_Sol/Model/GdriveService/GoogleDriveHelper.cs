@@ -3,13 +3,14 @@ using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v3;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Samplebacked_api.Model.GdriveService
 {
+    
     public class GoogleDriveHelper
     {
-
-        private readonly DriveService _service;
+                private readonly DriveService _service;
 
         public GoogleDriveHelper()
         {
